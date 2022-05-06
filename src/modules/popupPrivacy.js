@@ -1,15 +1,18 @@
-import popupRepair from "./popupRepair"
-
 const popupPrivacy = () => {
-    const linkOpen = document.querySelector('.link-privacy')
+    const linkOpen = document.querySelectorAll('.link-privacy')
     const modal = document.querySelector('.popup-privacy')
-    const buttonClose = modal.querySelector('.close')
 
-    buttonClose.addEventListener('click', () => {
-        modal.style.visibility = 'hidden'
+    modal.addEventListener('click', (e) => {
+        if (e.target.matches('.close')) {
+            modal.style.visibility = 'hidden'
+        }
     })
-    linkOpen.addEventListener('click', () => {
-        modal.style.visibility = 'visible'
+    linkOpen.forEach((link, i) => {
+        if (link.textContent == 'политикой конфиденциальности') {
+            link.addEventListener('click', () => {
+                modal.style.visibility = 'visible'
+            })
+        }
     })
 }
 

@@ -1,7 +1,7 @@
 const hint = () => {
     const hintModal = document.querySelectorAll('.formula-item-popup')
+    const hintLink = document.querySelectorAll('.formula-item__icon')
     const hintBlock = document.querySelectorAll('.formula-item__icon-inner')
-    const hintLink = document.querySelectorAll('.formula-item__icon-inner-text')
 
     hintLink.forEach((link, index) => {
         link.addEventListener('mouseenter', () => {

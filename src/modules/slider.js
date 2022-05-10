@@ -1,5 +1,5 @@
 const slider = (block, slides) => {
-    const sliderBlock = document.getElementById(block)
+    const sliderBlock = document.querySelector(block)
     const slideCount = sliderBlock.querySelector('.slider-counter-content__current')
     const slideTotal = sliderBlock.querySelector('.slider-counter-content__total')
 
@@ -8,7 +8,7 @@ const slider = (block, slides) => {
     let count = 1
     let indexSlide = 0
 
-    const slideOff = () => {
+    let slideOff = () => {
         numSlides.forEach((btn, key) => {
             numSlides[key].style.display = 'none'
             numSlides[key].style.position = 'relative'
@@ -16,10 +16,75 @@ const slider = (block, slides) => {
         })
     }
 
-    const slideOn = (indexSlide) => {
+    let slideOn = (indexSlide) => {
         numSlides[indexSlide].style.display = 'block'
         numSlides[indexSlide].style.position = 'absolute'
         numSlides[indexSlide].style.top = 0
+    }
+
+    const portfolio = (block, slides) => {
+        if (slides == '.popup-portfolio') {
+            const modal = document.querySelector('.portfolio-slider')
+            const modalOpen = modal.querySelectorAll('.portfolio-slider__slide-frame')
+
+            slideOff()
+
+            modalOpen.forEach((btn, i) => {
+                btn.addEventListener('click', () => {
+                    indexSlide = i
+                    slideOn(indexSlide)
+                    slideCount.textContent = indexSlide + 1
+                    count = indexSlide + 1
+                })
+            })
+        } else if (block == '.popup-transparency') {
+            const modal = document.querySelector('.transparency-slider')
+            const modalOpen = modal.querySelectorAll('.transparency-item__img')
+            const close = sliderBlock.querySelector('.close')
+    
+            close.addEventListener('click', slideOff)
+
+            slideOff()
+
+            modalOpen.forEach((btn, i) => {
+                btn.addEventListener('click', () => {
+                    indexSlide = i
+                    slideOn(indexSlide)
+                    slideCount.textContent = indexSlide + 1
+                    count = indexSlide + 1
+                })
+            })
+        }
+    }
+
+    const portfolioText = () => {
+        const wrapper = sliderBlock.querySelector('.row')
+        const modal = document.querySelector('.popup-portfolio')
+        const close = modal.querySelector('.close')
+
+        close.addEventListener('click', slideOff)
+
+        wrapper.style.height = 100 + '%'
+
+        numSlides = sliderBlock.querySelectorAll(slides)
+
+        slideOff = () => {
+            numSlides.forEach((btn, key) => {
+                numSlides[key].style.display = 'none'
+                numSlides[key].style.position = 'relative'
+                numSlides[key].style.top = 0
+                numSlides[key].style.right = 0
+            })
+        }
+    
+        slideOn = (indexSlide) => {
+            numSlides[indexSlide].style.display = 'block'
+            numSlides[indexSlide].style.position = 'absolute'
+            numSlides[indexSlide].style.top = 0
+            numSlides[indexSlide].style.right = 0
+        }
+
+        portfolio(block, '.popup-portfolio')
     }
 
     const repair = () => {
@@ -63,8 +128,12 @@ const slider = (block, slides) => {
         })
     }
     
-    if (block == 'repair-types') {
+    if (block == '#repair-types') {
         repair()
+    } else if (slides == '.popup-portfolio' || block == '.popup-transparency') {
+        portfolio(block, slides)
+    } else if (slides == '.popup-portfolio-text') {
+        portfolioText()
     }
 
     slideTotal.textContent = numSlides.length
@@ -73,7 +142,7 @@ const slider = (block, slides) => {
     count = 1
 
     sliderBlock.addEventListener('click', (e) => {
-        if (e.target.closest('#repair-types-arrow_right')) {
+        if (e.target.closest('#repair-types-arrow_right') || e.target.closest('#transparency_right') || e.target.closest('#popup_portfolio_right')) {
             if (count == slideTotal.textContent) {
                 count = 0
             }
@@ -84,10 +153,10 @@ const slider = (block, slides) => {
             if (indexSlide == numSlides.length) {
                 indexSlide = 0
             }
-            sldieOn(indexSlide)
+            slideOn(indexSlide)
         }
 
-        if (e.target.closest('#repair-types-arrow_left')) {
+        if (e.target.closest('#repair-types-arrow_left') || e.target.closest('#transparency_left') || e.target.closest('#popup_portfolio_left')) {
             count--
             if (count == 0) {
                 count = slideTotal.textContent

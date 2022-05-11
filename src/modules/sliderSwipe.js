@@ -107,8 +107,6 @@ const sliderSwipe = (sliderBlock, sliderWrapper) => {
         modal[indexSlide].style.visibility = 'visible'
         modal[indexSlide].style.opacity = 1
 
-        console.log(indexSlide);
-
         block.addEventListener('click', (e) => {
             if (e.target.closest('#formula-arrow_right')) {
                 slideOff()
@@ -129,7 +127,6 @@ const sliderSwipe = (sliderBlock, sliderWrapper) => {
                 } else if (indexSlide == 7) {
                     indexSlide = 1
                 }
-                console.log(indexSlide);
                 slides[indexSlide].style.opacity = 1
                 slides[indexSlide].style.marginTop = -80 + 'px'
                 modal[indexSlide].style.visibility = 'visible'

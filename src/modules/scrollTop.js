@@ -15,15 +15,17 @@ const scrollTop = () => {
     const anchors = document.querySelectorAll('[href*="#"]')
 
     for (let anchor of anchors) {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', (e) => {
         e.preventDefault()
+
+        if (!e.target.closest('.link-list')) {
+            const blockID = anchor.getAttribute('href').substr(1)
         
-        const blockID = anchor.getAttribute('href').substr(1)
-        
-        document.getElementById(blockID).scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-        })
+            document.getElementById(blockID).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+            })
+        }
     })
 }
 

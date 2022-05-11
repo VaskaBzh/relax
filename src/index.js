@@ -9,6 +9,7 @@ import accordion from './modules/accordion'
 import slider from './modules/slider'
 import sliderSwipe from './modules/sliderSwipe'
 import sendForm from './modules/sendForm'
+import price from './modules/price'
 
 telephone()
 menu()
@@ -31,6 +32,7 @@ sliderSwipe('#repair-types', '.nav-list')
 sliderSwipe('#formula', '.formula-slider')
 sliderSwipe('#reviews', '.reviews-slider')
 sliderSwipe('#transparency', '.transparency-slider')
+price()
 
 sendForm({
     formId: 'feedback1',

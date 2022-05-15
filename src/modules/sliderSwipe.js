@@ -50,7 +50,9 @@ const sliderSwipe = (sliderBlock, sliderWrapper) => {
     }
 
     const formula = () => {
-        block.style.overflowX = 'hidden'
+        if(window.innerWidth <= 1024) {
+            block.style.overflowX = 'hidden'
+        }
 
         const prevElement = document.createElement('div')
         const nextElement = document.createElement('div')
@@ -75,7 +77,7 @@ const sliderSwipe = (sliderBlock, sliderWrapper) => {
                 slide.style.opacity = 0.4
                 slide.style.marginTop = -100 + 'px'
                 modal[i].style.visibility = 'hidden'
-                modal[i].style.opacity = 0
+                modal[i].style.opacity = 0  
             })
         }
 

@@ -1,3 +1,4 @@
+import admin from './modules/admin'
 import telephone from './modules/telephone'
 import menu from './modules/menu'
 import smoothButtonUp from './modules/smoothButtonUp'
@@ -11,6 +12,7 @@ import sliderSwipe from './modules/sliderSwipe'
 import sendForm from './modules/sendForm'
 import price from './modules/price'
 
+admin()
 telephone()
 menu()
 smoothButtonUp()

@@ -1,12 +1,11 @@
-import { Get } from './get'
+import { Using } from './using'
 import render from './render'
 
 const price = () => {
-    window.get = new Get
+    window.using = new Using
 
-    get.getTable().then(data => {
-        console.log(data);
-        render(data)
+    using.getTable().then(data => {
+        render(data, 'toTable')
     })
 }
 

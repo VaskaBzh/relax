@@ -165,6 +165,8 @@ const sliderSwipe = (sliderBlock, sliderWrapper) => {
 
     const reviews = () => {
         const slides = slider.querySelectorAll(sliderWrapper + '__slide')
+
+        let positionChanger = slides[0].clientWidth
     
         const swipe = (position) => {
             slides.forEach((slide, i) => {
@@ -181,9 +183,9 @@ const sliderSwipe = (sliderBlock, sliderWrapper) => {
         block.addEventListener('click', (e) => {
             if (e.target.closest('#reviews-arrow_right')) {
                 if (window.innerWidth > 768) {
-                    position -= 494
+                    position -= positionChanger
                 } else if (window.innerWidth <= 768) {
-                    position -= 494
+                    position -= positionChanger
                 }
                 if (position < -1976) {
                     position = 0

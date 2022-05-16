@@ -36,36 +36,37 @@ const render = (objects, title) => {
 
         wrapper.style.display = 'flex'
         // wrapper.style.overflowX = 'hidden'
+        block.querySelector('.nav-popup-repair-types').style.overflow = 'scroll'
 
-        // const swiper = () => {
-        //     const tab = tabs.querySelectorAll('.popup-repair-types-nav__item')
+        const swiper = () => {
+            const tab = tabs.querySelectorAll('.popup-repair-types-nav__item')
 
-        //     wrapper.querySelectorAll('tr').forEach((tr, i) => {
-        //         tr.style.width = 674 + 'px'
-        //         tr.style.display = 'inline-block'
-        //     })
-        //     let positionChange = wrapper.querySelector('table').clientWidth
+            wrapper.querySelectorAll('tr').forEach((tr, i) => {
+                tr.style.width = 674 + 'px'
+                tr.style.display = 'inline-block'
+            })
+            let positionChange = wrapper.querySelector('table').clientWidth
 
-        //     const positionChanger = () => {
-        //         positionChange = wrapper.querySelector('table').clientWidth
-        //     }
+            const positionChanger = () => {
+                positionChange = wrapper.querySelector('table').clientWidth
+            }
 
-        //     let indexSlide = 0
-        //     let position = 0
+            let indexSlide = 0
+            let position = 0
 
-        //     tab[0].classList.add('active')
+            tab[0].classList.add('active')
 
-        //     block.addEventListener('click', (e) => {
-        //         if (e.target.closet('.popup-repair-types-nav__item')) {
-        //             positionChanger()
-        //             tab.forEach((el, i) => {
-        //                 el.classList.remove('active')
-        //             })
-        //         }
-        //     })
-        // }
+            block.addEventListener('click', (e) => {
+                if (e.target.closest('.popup-repair-types-nav__item')) {
+                    positionChanger()
+                    tab.forEach((el, i) => {
+                        el.classList.remove('active')
+                    })
+                }
+            })
+        }
 
-        // setTimeout(swiper, 1500)
+        setTimeout(swiper, 1500)
     } else if (title == 'toAdmin') {
         const tbody = document.getElementById('tbody')
         const filter = document.getElementById('typeItem')

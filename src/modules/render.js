@@ -35,41 +35,50 @@ const render = (objects, title) => {
         var tbodys = wrapper.querySelectorAll('tbody')
 
         wrapper.style.display = 'flex'
-        // wrapper.style.overflewX = 'hidden'
+        // wrapper.style.overflowX = 'hidden'
 
-        const swiper = () => {
-            const tab = tabs.querySelectorAll('.popup-repair-types-nav__item')
+        // const swiper = () => {
+        //     const tab = tabs.querySelectorAll('.popup-repair-types-nav__item')
 
-            wrapper.querySelectorAll('tr').forEach((tr, i) => {
-                tr.style.width = 674 + 'px'
-                tr.style.display = 'inline-block'
-            })
-            let positionChange = wrapper.querySelector('table').clientWidth
+        //     wrapper.querySelectorAll('tr').forEach((tr, i) => {
+        //         tr.style.width = 674 + 'px'
+        //         tr.style.display = 'inline-block'
+        //     })
+        //     let positionChange = wrapper.querySelector('table').clientWidth
 
-            const positionChanger = () => {
-                positionChange = wrapper.querySelector('table').clientWidth
-            }
+        //     const positionChanger = () => {
+        //         positionChange = wrapper.querySelector('table').clientWidth
+        //     }
 
-            let indexSlide = 0
-            let position = 0
+        //     let indexSlide = 0
+        //     let position = 0
 
-            tab[0].classList.add('active')
+        //     tab[0].classList.add('active')
 
-            block.addEventListener('click', (e) => {
-                if (e.target.closet('.popup-repair-types-nav__item')) {
-                    positionChanger()
-                    tab.forEach((el, i) => {
-                        el.classList.remove('active')
-                    })
-                }
-            })
-        }
+        //     block.addEventListener('click', (e) => {
+        //         if (e.target.closet('.popup-repair-types-nav__item')) {
+        //             positionChanger()
+        //             tab.forEach((el, i) => {
+        //                 el.classList.remove('active')
+        //             })
+        //         }
+        //     })
+        // }
 
-        setTimeout(swiper, 1500)
+        // setTimeout(swiper, 1500)
     } else if (title == 'toAdmin') {
         const tbody = document.getElementById('tbody')
+        const filter = document.getElementById('typeItem')
 
         tbody.innerHTML = ''
+        filter.innerHTML = ''
+
+        filter.insertAdjacentHTML('beforeend', `<option value="" selected></option>`)
+        filter.insertAdjacentHTML('beforeend', `<option value="Все услуги">Все услуги</option>`)
+
+        Array.from(new Set(types)).forEach((type, i) => {
+            filter.insertAdjacentHTML('beforeend', `<option value="${type}">${type}</option>`)
+        })
     }
 
     objects.forEach((obj, i) => {

@@ -32,4 +32,8 @@ export class Using {
             body: JSON.stringify(element)
         })
     }
+
+    filterService(filterOption) {
+        return fetch(`http://localhost:3004/object?type=${filterOption}`).then(res => res.json())
+    }
 }

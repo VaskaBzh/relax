@@ -7,6 +7,7 @@ const admin = () => {
     if (body.matches('.admin')) {
         const tableWrapper = document.querySelector('.table__wrapper')
         const tbody = document.getElementById('tbody')
+        const filter = document.getElementById('typeItem')
     
         tableWrapper.style.height = 500 + 'px'
         
@@ -56,58 +57,74 @@ const admin = () => {
         
         const editService = () => {
             tbody.addEventListener('click', (e) => {
-            e.preventDefault()
+                e.preventDefault()
 
-            if (e.target.closest('.action-change')) {
-                let tr = e.target.closest('tr')
-                const id = tr.dataset.key
+                if (e.target.closest('.action-change')) {
+                    let tr = e.target.closest('tr')
+                    const id = tr.dataset.key
 
-                using.getService(id).then(res => {
-                    tr.innerHTML = `<td class="table__id table__cell">${res.id}</td>
-                    <td class="table-type table__cell"><input type="text" class="input type" value="${res.type}"></td>
-                    <td class="table-name table__cell"><input type="text" class="input name" value="${res.name}"></td>
-                    <td class="table-units table__cell"><input type="text" class="input units" value="${res.units}"></td>
-                    <td class="table-cost table__cell"><input type="text" class="input cost" value="${res.cost}"> руб</td>
-                    <td>
-                        <div class="table__actions table__cell">
-                            <button class="button action-confirm"><span class="svg_ui"><svg class="action-icon_change"><use xlink:href="./img/sprite.svg#change"></use></svg></span><span>Сохранить</span>
-                            </button>
-                            <button class="button action-remove"><span class="svg_ui"><svg class="action-icon_remove"><use xlink:href="./img/sprite.svg#remove"></use></svg></span><span>Удалить</span>
-                            </button>
-                        </div>
-                    </td>`
+                    using.getService(id).then(res => {
+                        tr.innerHTML = `<td class="table__id table__cell">${res.id}</td>
+                        <td class="table-type table__cell"><input type="text" class="input type" value="${res.type}"></td>
+                        <td class="table-name table__cell"><input type="text" class="input name" value="${res.name}"></td>
+                        <td class="table-units table__cell"><input type="text" class="input units" value="${res.units}"></td>
+                        <td class="table-cost table__cell"><input type="text" class="input cost" value="${res.cost}"> руб</td>
+                        <td>
+                            <div class="table__actions table__cell">
+                                <button class="button action-confirm"><span class="svg_ui"><svg class="action-icon_change"><use xlink:href="./img/sprite.svg#change"></use></svg></span><span>Сохранить</span>
+                                </button>
+                                <button class="button action-remove"><span class="svg_ui"><svg class="action-icon_remove"><use xlink:href="./img/sprite.svg#remove"></use></svg></span><span>Удалить</span>
+                                </button>
+                            </div>
+                        </td>`
 
-                    tbody.addEventListener('click', (e) => {
-                        e.preventDefault()
+                        tbody.addEventListener('click', (e) => {
+                            e.preventDefault()
 
-                        if (e.target.closest('.action-confirm')) {
-                            const inputType = tr.querySelector('.type').value
-                            const inputName = tr.querySelector('.name').value
-                            const inputUnits = tr.querySelector('.units').value
-                            const inputCost = tr.querySelector('.cost').value
+                            if (e.target.closest('.action-confirm')) {
+                                const inputType = tr.querySelector('.type').value
+                                const inputName = tr.querySelector('.name').value
+                                const inputUnits = tr.querySelector('.units').value
+                                const inputCost = tr.querySelector('.cost').value
 
-                            const service = {
-                                type: inputType,
-                                name: inputName,
-                                units: inputUnits,
-                                cost: inputCost
-                            }
+                                const service = {
+                                    type: inputType,
+                                    name: inputName,
+                                    units: inputUnits,
+                                    cost: inputCost
+                                }
 
-                            using.editService(id, service).then(() => {
-                                using.getTable().then(data => {
-                                    render(data, 'toAdmin')
+                                using.editService(id, service).then(() => {
+                                    using.getTable().then(data => {
+                                        render(data, 'toAdmin')
+                                    })
                                 })
-                            })
-                        }
+                            }
+                        })
                     })
-                })
-            }
-        })
+                }
+            })
+        }
+
+        const filterService = () => {
+            filter.addEventListener('change', (e) => {
+                console.log(e.target.value);
+                if (e.target.value != 'Все услуги') {
+                    using.filterService(e.target.value).then(filtered => {
+                        render(filtered, 'toAdmin')
+                    })
+                } else {
+                    using.getTable().then(data => {
+                        render(data, 'toAdmin')
+                    })
+                }
+            })
         }
 
         addService()
         removeService()
         editService()
+        filterService()
     }
 }
 
